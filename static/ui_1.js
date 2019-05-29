@@ -1,25 +1,54 @@
-//Plot Modules are instantiated
 define (function(require){
-    mutations_forgenes_charts = require('./mutations_forgenes_charts');    
-    mrna_forgenes_charts = require('./mrna_forgenes_charts');            
-    dis_cna_forgenes_charts = require('./dis_cna_forgenes_charts');
-    dis_cna_forgenes_charts_grouped = require('./dis_cna_forgenes_charts_grouped');
-    mutations_forpatients_charts = require('./mutations_forpatients_charts');
-    mutations_forgenes_charts_grouped = require('./mutations_forgenes_charts_grouped');
-    mrna_forpatients_charts = require('./mrna_forpatients_charts');
-    dis_cna_forpatients_charts = require('./dis_cna_forpatients_charts');
-    mrna_forgenes_charts_grouped = require('./mrna_forgenes_charts_grouped');
-    mRNA_bloodvsnonblood_charts = require('./mRNA_bloodvsnonblood_charts');
-    mRNAcharts_allBloodNonblood = require('./mRNAcharts_allBloodNonblood');
-    mrna_for_multigenes_gbm_grouped = require('./mrna_for_multigenes_gbm_grouped');
-    mrna_for_multigenes_lgg_gbm_grouped = require('./mrna_for_multigenes_lgg_gbm_grouped');    
-    console.log(mrna_for_multigenes_gbm_grouped);    
-}); //end of plots modules defintion
+    //Plot Modules are instantiated
+    mutations_forgenes_charts = require('./mutations_forgenes_charts');        
+    mrna_forgenes_charts = require('./mrna_forgenes_charts');                
+    dis_cna_forgenes_charts = require('./dis_cna_forgenes_charts');    
+    dis_cna_forgenes_charts_grouped = require('./dis_cna_forgenes_charts_grouped');    
+    mutations_forpatients_charts = require('./mutations_forpatients_charts');    
+    mutations_forgenes_charts_grouped = require('./mutations_forgenes_charts_grouped');    
+    mrna_forpatients_charts = require('./mrna_forpatients_charts');    
+    dis_cna_forpatients_charts = require('./dis_cna_forpatients_charts');    
+    mrna_forgenes_charts_grouped = require('./mrna_forgenes_charts_grouped');    
+    mRNA_bloodvsnonblood_charts = require('./mRNA_bloodvsnonblood_charts');    
+    mRNAcharts_allBloodNonblood = require('./mRNAcharts_allBloodNonblood');    
+    mrna_for_multigenes_gbm_grouped = require('./mrna_for_multigenes_gbm_grouped');    
+    mrna_for_multigenes_lgg_gbm_grouped = require('./mrna_for_multigenes_lgg_gbm_grouped');     
 
-//Gene Modules are instantiated
-define (function(require){
-
-}); //end of genes modules defintion
+    //Gene Modules are instantiated
+    clinical_Data_4_sample_studyID = require('./clinical_Data_4_sample_studyID');    
+    clinical_Data_4_patient = require('./clinical_Data_4_patient');    
+    clinical_Events = require('./clinical_Events');    
+    cancer_types_all = require('./cancer_types_all');    
+    clinical_attributes = require('./clinical_attributes');    
+    all_sampleIDs_in_samplelist = require('./all_sampleIDs_in_samplelist');    
+    clinical_attributes_studyID = require('./clinical_attributes_studyID');    
+    copy_number_segments = require('./copy_number_segments');    
+    discrete_copynumber_alterations = require('./discrete_copynumber_alterations');    
+    get_all_gene_panel = require('./get_all_gene_panel');    
+    gene_panelID = require('./gene_panelID');    
+    molecular_data = require('./molecular_data');    
+    molecular_profiles_all = require('./molecular_profiles_all');    
+    sampleList_in_sampleId = require('./sampleList_in_sampleId');    
+    molecular_profiles_id = require('./molecular_profiles_id');    
+    molecular_profiles_4_cancerstudyid = require('./molecular_profiles_4_cancerstudyid');    
+    allcaselists_in_study = require('./allcaselists_in_study');    
+    samplelist_in_study = require('./samplelist_in_study');    
+    allsamples_patient_in_study = require('./allsamples_patient_in_study');    
+    molecular_mutations_profiles_4_cancerstudyid = require('./molecular_mutations_profiles_4_cancerstudyid');    
+    all_patients_in_study = require('./all_patients_in_study');    
+    patient_in_study = require('./patient_in_study');    
+    cBio_SamplesList = require('./cBio_SamplesList');    
+    sampleList_in_study = require('./sampleList_in_study');    
+    sample_in_study = require('./sample_in_study');    
+    all_samples_in_study = require('./all_samples_in_study');    
+    all_available_studies = require('./all_available_studies');    
+    tags_of_study = require('./tags_of_study');    
+    single_study = require('./single_study');    
+    clinical_Data_4_study = require('./clinical_Data_4_study');    
+    copynumberregions_in_study = require('./copynumberregions_in_study');    
+    mutated_genes_in_study = require('./mutated_genes_in_study');    
+    
+}); //end of plots, gene modules instantiation
 
 config = {}
 //config.BASE_URL = "http://candygram.neurology.emory.edu:8080/api/v1"
@@ -127,87 +156,87 @@ function single_select(item) {
             autoOpen: false,
             buttons: {
                 clinical_Data_4_patient: function() {
-                    clinical_Data_4_patient(patientID);                    
+                    clinical_Data_4_patient.clinical_Data_4_patient(patientID);                    
                     $(this).dialog("close");
                 },
                 clinical_Data_4_study: function() {
-                    clinical_Data_4_study(studyID);                    
+                    clinical_Data_4_study.clinical_Data_4_study(studyID);                    
                     $(this).dialog("close");
                 },
                 clinical_Data_4_sample_studyID: function() {
-                    clinical_Data_4_sample_studyID(studyID);                    
+                    clinical_Data_4_sample_studyID.clinical_Data_4_sample_studyID(studyID);                    
                     $(this).dialog("close");
                 },
                 clinical_Events: function() {
-                    clinical_Events(patientID);
+                    clinical_Events.clinical_Events(patientID);
                     $(this).dialog("close");
                 },
                 copy_number_segments: function() {
-                    copy_number_segments(sampleID);                    
+                    copy_number_segments.copy_number_segments(sampleID);                    
                     $(this).dialog("close");
                 },
                 molecular_data:function(){
-                    molecular_data();
+                    molecular_data.molecular_data();
                     $(this).dialog("close");
                 },
                 all_patients_in_study:function(){
-                    all_patients_in_study();
+                    all_patients_in_study.all_patients_in_study();
                     $(this).dialog("close");
                 },                
                 patient_in_study:function(){
-                    patient_in_study(patientID);
+                    patient_in_study.patient_in_study(patientID);
                     $(this).dialog("close");
                 },
                 cBio_SamplesList: function() {
-                    cBio_SamplesList();                    
+                    cBio_SamplesList.cBio_SamplesList();                    
                     $(this).dialog("close");
                 },
                 sampleList_in_sampleId: function() {
-                    sampleList_in_sampleId();                    
+                    sampleList_in_sampleId.sampleList_in_sampleId();                    
                     $(this).dialog("close");
                 },
                 all_sampleIDs_in_samplelist: function() {
-                    all_sampleIDs_in_samplelist();                    
+                    all_sampleIDs_in_samplelist.all_sampleIDs_in_samplelist();                    
                     $(this).dialog("close");
                 },                
                 samplelist_in_study: function() {
-                    samplelist_in_study();                    
+                    samplelist_in_study.samplelist_in_study();                    
                     $(this).dialog("close");
                 },
                 allcaselists_in_study: function(){
-                    allcaselists_in_study();                    
+                    allcaselists_in_study.allcaselists_in_study();                    
                     $(this).dialog("close");
                 },
                 allsamples_patient_in_study: function() {
-                    allsamples_patient_in_study(patientID);                    
+                    allsamples_patient_in_study.allsamples_patient_in_study(patientID);                    
                     $(this).dialog("close");
                 },
                 all_samples_in_study: function() {
-                    all_samples_in_study();                    
+                    all_samples_in_study.all_samples_in_study();                    
                     $(this).dialog("close");
                 },
                 sample_in_study: function() {
-                    sample_in_study(patientID);                    
+                    sample_in_study.sample_in_study(patientID);                    
                     $(this).dialog("close");
                 },                                 
                 mutated_genes_in_study: function() {
-                    mutated_genes_in_study();                    
+                    mutated_genes_in_study.mutated_genes_in_study();                    
                     $(this).dialog("close");
                 },
                 copynumberregions_in_study: function() {
-                    copynumberregions_in_study();                    
+                    copynumberregions_in_study.copynumberregions_in_study();                    
                     $(this).dialog("close");
                 },                
                 all_available_studies: function() {
-                    all_available_studies();                    
+                    all_available_studies.all_available_studies();                    
                     $(this).dialog("close");
                 },
                 single_study: function() {
-                    single_study();                    
+                    single_study.single_study();                    
                     $(this).dialog("close");
                 },
                 tags_of_study: function() {
-                    tags_of_study();                    
+                    tags_of_study.tags_of_study();                    
                     $(this).dialog("close");
                 },  
                 generic_cBioportal: function() {
@@ -766,39 +795,39 @@ function generic_cBioportal(){
                     $(this).dialog("close");
                 },
                 clinical_attributes:function(){
-                    clinical_attributes();
+                    clinical_attributes.clinical_attributes();
                     $(this).dialog("close");
                 },
                 clinical_attributes_studyID:function(){
-                    clinical_attributes_studyID();
+                    clinical_attributes_studyID.clinical_attributes_studyID();
                     $(this).dialog("close");
                 },
                 get_all_gene_panel:function(){
-                    get_all_gene_panel();
+                    get_all_gene_panel.get_all_gene_panel();
                     $(this).dialog("close");
                 },                
                 molecular_profiles_all:function(){
-                    molecular_profiles_all();
+                    molecular_profiles_all.molecular_profiles_all();
                     $(this).dialog("close");
                 },
-                molecular_profile_id:function(){
-                    molecular_profiles_id();
+                molecular_profiles_id:function(){
+                    molecular_profiles_id.molecular_profiles_id();
                     $(this).dialog("close");
                 },
                 molecular_profiles_4_cancerstudyid:function(){
-                    molecular_profiles_4_cancerstudyid()();
+                    molecular_profiles_4_cancerstudyid.molecular_profiles_4_cancerstudyid()();
                     $(this).dialog("close");
                 },
                 molecular_mutations_profiles_4_cancerstudyid:function(){
-                    molecular_mutations_profiles_4_cancerstudyid();
+                    molecular_mutations_profiles_4_cancerstudyid.molecular_mutations_profiles_4_cancerstudyid();
                     $(this).dialog("close");
                 },
                 discrete_copynumber_alterations: function() {
-                    discrete_copynumber_alterations();                    
+                    discrete_copynumber_alterations.discrete_copynumber_alterations();                    
                     $(this).dialog("close");
                 },
                 gene_panelID: function() {
-                    gene_panelID();                    
+                    gene_panelID.gene_panelID();                    
                     $(this).dialog("close");
                 },
                 main_CBioportal_Dialog: function() {
