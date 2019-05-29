@@ -1,7 +1,7 @@
 define(function(){
 
 	var mrna_forgenes_charts_grouped = {
-		mrna_forgenes_charts_grouped : function(){
+		mrna_forgenes_charts_grouped : function(entrezGeneId){
 			samplelistid = "gbm_tcga_all";        
 	        molecularprofileid = "gbm_tcga_pan_can_atlas_2018_rna_seq_v2_mrna"; //gbm_tcga_mrna,gbm_tcga_rna_seq_v2_mrna   
 	        entrezGeneId = entrezGeneId;

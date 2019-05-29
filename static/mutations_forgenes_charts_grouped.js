@@ -33,8 +33,7 @@ define(function(){
 		                      item = items[i]; 
 		                      //if ((item['mutationType'] == 'Missense_Mutation') || (item['mutationType'] == 'In_Frame_Ins') || (item['mutationType'] == 'NonStop_Mutation') || (item['mutationType'] == 'Translation_Start_Site') )
 		                      if ((item['mutationType'] == 'Missense_Mutation'))
-		                      {
-		                          console.log('gbm')
+		                      {		                          
 		                          sampleID[i] = item['sampleId'];
 		                          mutationtype[i] = item['mutationType'];
 		                          entrezGeneId[i] = item['entrezGeneId'];
@@ -58,8 +57,7 @@ define(function(){
 		                        itemlgg = itemslgg[i]; 
 		                        //if ((itemlgg['mutationType'] == 'Missense_Mutation') || (itemlgg['mutationType'] == 'In_Frame_Ins') || (itemlgg['mutationType'] == 'NonStop_Mutation') || (itemlgg['mutationType'] == 'Translation_Start_Site') )
 		                        if ((itemlgg['mutationType'] == 'Missense_Mutation'))
-		                        {
-		                            console.log ('lgg');
+		                        {		                            
 		                            sampleIDlgg[i] = itemlgg['sampleId'];
 		                            mutationtypelgg[i] = itemlgg['mutationType'];
 		                            entrezGeneIdlgg[i] = itemlgg['entrezGeneId'];
@@ -110,7 +108,7 @@ define(function(){
 		            }) //end of JSONData
 		          })//end of promiselgg
 		        })//end of promise
-		} //end of named/internal function			
-
+		} //end of named/internal function	
 	} //end of var
+	return mutations_forgenes_charts_grouped; 
 })//end of define
