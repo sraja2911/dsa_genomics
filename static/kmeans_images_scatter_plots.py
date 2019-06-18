@@ -1,14 +1,4 @@
-
-# coding: utf-8
-
-# In[1]:
-
-
 get_ipython().system(u'pip install PyPR')
-
-
-# In[2]:
-
 
 get_ipython().magic(u'matplotlib inline')
 import matplotlib.pyplot as plt
@@ -17,10 +7,6 @@ from skimage import io
 from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
-
-
-# In[3]:
-
 
 def centroid_histogram(clt):    
 # grab the number of different clusters and create a histogram
@@ -32,10 +18,6 @@ def centroid_histogram(clt):
     hist /= hist.sum() 
     # return the histogram
     return hist
-
-
-# In[5]:
-
 
 def plot_colors(hist, centroids):
 # initialize the bar chart representing the relative frequency
@@ -54,22 +36,10 @@ def plot_colors(hist, centroids):
     return bar
 
 
-# In[6]:
-
-
 ## K-means clustering of Pathology Images
-
-
-# In[7]:
-
-
 image = io.imread('/media/raj/Raj1_5/kmeans/TCGA-02-0001-01Z-00-DX2.b521a862-280c-4251-ab54-5636f20605d0.jpeg')
 io.imshow(image)
 io.show()
-
-
-# In[8]:
-
 
 image = io.imread('/media/raj/Raj1_5/kmeans/TCGA-02-0001-01Z-00-DX2.b521a862-280c-4251-ab54-5636f20605d0.jpeg')
 rows=image.shape[0]
@@ -77,40 +47,13 @@ cols=image.shape[1]
 image=image.reshape(image.shape[0]*image.shape[1],3)
 
 
-# In[9]:
-
-
 # kmeans = KMeans(n_clusters = 128, n_init=10, max_iter=200)
 kmeans = KMeans(n_clusters = 3, n_init=10, max_iter=200)
 kmeans.fit(image)
-
-
-# In[10]:
-
-
-kmeans.cluster_centers_
-
-
-# In[11]:
-
-
 numLabels = np.arange(0, len(np.unique(kmeans.labels_)) + 1)
-
-
-# In[12]:
-
 
 hist = centroid_histogram(kmeans)
 bar = plot_colors(hist, kmeans.cluster_centers_)
- 
-# show our color bart
-plt.figure()
-plt.imshow(bar)
-plt.show()
-
-
-# In[13]:
-
 
 #http://pypr.sourceforge.net/kmeans.html#k-means-example
 #https://github.com/mubaris/friendly-fortnight/blob/master/kmeans-from-scratch-and-sklearn.py
@@ -131,16 +74,6 @@ plot(image[m==1, 0], image[m==1, 1], '.')
 plot(image[m==2, 0], image[m==2, 1], '.')
 xlabel('$ColorClusters$'); ylabel('$ClusterCentroids$')
 
-
-# In[ ]:
-
-
-pd.DataFrame(kmeans.labels_)
-
-
-# In[16]:
-
-
 #Plot the clusters obtained using k means
 kmeans = KMeans(n_clusters = 3, n_init=10, max_iter=200)
 kmeans.fit(image)
@@ -151,10 +84,6 @@ ax.set_title('K-Means Clustering')
 ax.set_xlabel('Color')
 ax.set_ylabel('Image Data Points')
 plt.colorbar(scatter)
-
-
-# In[17]:
-
 
 import plotly
 import plotly.graph_objs as go
@@ -168,21 +97,11 @@ sqrd_distances=kmeans.inertia_
 plotly.offline.plot({
     "data": [go.Scatter(x=[numLabels], y=[img_pts], mode='markers')],
     "layout": go.Layout(title="Pathology Image Scatter Plot")}, auto_open=True)
-
-
 # In[ ]:
-
-
 import plotly
 plotly.tools.set_credentials_file(username='sraja2911', api_key='IoeFycToNYSPKNijoAPs')
-
-
-# In[ ]:
-
-
 y0 = kmeans
 y1 = labels
-
 trace0 = go.Box(
     y=y0
 )
@@ -202,10 +121,7 @@ fig = go.Figure(data=data, layout=layout)
 
 py.iplot(data)
 
-
 # In[ ]:
-
-
 y0 = clusters
 y1 = labels
 
@@ -222,4 +138,3 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 
 py.iplot(data)
-

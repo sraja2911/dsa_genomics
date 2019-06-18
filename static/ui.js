@@ -47,6 +47,8 @@ define (function(require){
     clinical_Data_4_study = require('./clinical_Data_4_study');    
     copynumberregions_in_study = require('./copynumberregions_in_study');    
     mutated_genes_in_study = require('./mutated_genes_in_study');    
+
+    //kmeans_cluster_plot.kmeans_cluster_plot(slideid, imgpath, name);
     
 }); //end of plots, gene modules instantiation
 
@@ -114,8 +116,7 @@ var rajsFirstDataView = {
                     multi_select(ar_selected)                    
                 }
              },
-        'onItemClick': function(id) {
-            console.log(this.getSelectedItem(id))  
+        'onItemClick': function(id) {            
         }
     },       
     scheme: {
@@ -138,115 +139,151 @@ function single_select(item) {
     id = item._id;    
     var blood = []
     var ink = []
+    name = item.name;
+    slideid=id
 
-    if ("meta" in item) {
-        var tags = item.meta.tags;
-        var Stain_Types = item.meta.Stain_Types;
-        var Blood_Red_Percentage = item.meta.Blood_Red_Percentage;
-        var White_Blood_Cell_Count = item.meta.White_Blood_Cell_Count;
-        var Cancer_Grading = item.meta.Cancer_Grading;
+    imgpath = "/media/raj/Raj1_5/kmeans/";
+    // var kmeans_script = '/color_kmeans';
+    // var ContentKey = 'Content-type';
+    // var ContentVal = 'application/x-www-form-urlencoded';
 
-        patientID = item.name.substring(0,12);
-        sampleID = item.name.substring(0,15); 
-       
-        var blood = item.meta['blood'];
-        var ink = item.meta['Ink'];                      
-                        
-        $("#maindialog").dialog({
-            autoOpen: false,
-            buttons: {
-                clinical_Data_4_patient: function() {
-                    clinical_Data_4_patient.clinical_Data_4_patient(patientID);                    
-                    $(this).dialog("close");
-                },
-                clinical_Data_4_study: function() {
-                    clinical_Data_4_study.clinical_Data_4_study(studyID);                    
-                    $(this).dialog("close");
-                },
-                clinical_Data_4_sample_studyID: function() {
-                    clinical_Data_4_sample_studyID.clinical_Data_4_sample_studyID(studyID);                    
-                    $(this).dialog("close");
-                },
-                clinical_Events: function() {
-                    clinical_Events.clinical_Events(patientID);
-                    $(this).dialog("close");
-                },
-                copy_number_segments: function() {
-                    copy_number_segments.copy_number_segments(sampleID);                    
-                    $(this).dialog("close");
-                },
-                molecular_data:function(){
-                    molecular_data.molecular_data();
-                    $(this).dialog("close");
-                },
-                all_patients_in_study:function(){
-                    all_patients_in_study.all_patients_in_study();
-                    $(this).dialog("close");
-                },                
-                patient_in_study:function(){
-                    patient_in_study.patient_in_study(patientID);
-                    $(this).dialog("close");
-                },
-                cBio_SamplesList: function() {
-                    cBio_SamplesList.cBio_SamplesList();                    
-                    $(this).dialog("close");
-                },
-                sampleList_in_sampleId: function() {
-                    sampleList_in_sampleId.sampleList_in_sampleId();                    
-                    $(this).dialog("close");
-                },
-                all_sampleIDs_in_samplelist: function() {
-                    all_sampleIDs_in_samplelist.all_sampleIDs_in_samplelist();                    
-                    $(this).dialog("close");
-                },                
-                samplelist_in_study: function() {
-                    samplelist_in_study.samplelist_in_study();                    
-                    $(this).dialog("close");
-                },
-                allcaselists_in_study: function(){
-                    allcaselists_in_study.allcaselists_in_study();                    
-                    $(this).dialog("close");
-                },
-                allsamples_patient_in_study: function() {
-                    allsamples_patient_in_study.allsamples_patient_in_study(patientID);                    
-                    $(this).dialog("close");
-                },
-                all_samples_in_study: function() {
-                    all_samples_in_study.all_samples_in_study();                    
-                    $(this).dialog("close");
-                },
-                sample_in_study: function() {
-                    sample_in_study.sample_in_study(patientID);                    
-                    $(this).dialog("close");
-                },                                 
-                mutated_genes_in_study: function() {
-                    mutated_genes_in_study.mutated_genes_in_study();                    
-                    $(this).dialog("close");
-                },
-                copynumberregions_in_study: function() {
-                    copynumberregions_in_study.copynumberregions_in_study();                    
-                    $(this).dialog("close");
-                },                
-                all_available_studies: function() {
-                    all_available_studies.all_available_studies();                    
-                    $(this).dialog("close");
-                },
-                single_study: function() {
-                    single_study.single_study();                    
-                    $(this).dialog("close");
-                },
-                tags_of_study: function() {
-                    tags_of_study.tags_of_study();                    
-                    $(this).dialog("close");
-                },  
-                generic_cBioportal: function() {
-                    generic_cBioportal();
-                    $(this).dialog("close");
-                }
-            },
-            width: "600px"
-        });
+    // var xmlhttp = new XMLHttpRequest();     
+    // xmlhttp.onreadystatechange=function() {
+    //     if (xmlhttp.readyState==4 && xmlhttp.status==200){
+    //         alert(xmlhttp.status + xmlhttp.statusText); // Returns 'OK'
+    //     }
+    // }
+
+    // xmlhttp.open("POST", kmeans_script, true);
+    // xmlhttp.setRequestHeader(ContentKey, ContentVal);
+    // var postData = 'slideid=' + slideid + '&name=' + name;
+    // xmlhttp.send(postData);
+
+   function runPyScript(slideid,name){
+        var jqXHR = $.ajax({
+            type: "GET",
+            url: "color_kmeans",
+            async: false,
+            dataType: "text",
+            data: { param: {slideid, name}}
+        });        
+        return jqXHR.responseText;
     }
+    // do something with the response
+    response = runPyScript(slideid,name);
+    console.log(response);
+    
+    //kmeans_cluster_plot.kmeans_cluster_plot(slideid, imgpath, name);
+
+    // Genomic Functions, Clinical Data Functions to get cBioPortal
+    // if ("meta" in item) {
+    //     var tags = item.meta.tags;
+    //     var Stain_Types = item.meta.Stain_Types;
+    //     var Blood_Red_Percentage = item.meta.Blood_Red_Percentage;
+    //     var White_Blood_Cell_Count = item.meta.White_Blood_Cell_Count;
+    //     var Cancer_Grading = item.meta.Cancer_Grading;
+
+    //     patientID = item.name.substring(0,12);
+    //     sampleID = item.name.substring(0,15); 
+       
+    //     var blood = item.meta['blood'];
+    //     var ink = item.meta['Ink'];                      
+                        
+    //     $("#maindialog").dialog({
+    //         autoOpen: false,
+    //         buttons: {
+    //             clinical_Data_4_patient: function() {
+    //                 clinical_Data_4_patient.clinical_Data_4_patient(patientID);                    
+    //                 $(this).dialog("close");
+    //             },
+    //             clinical_Data_4_study: function() {
+    //                 clinical_Data_4_study.clinical_Data_4_study(studyID);                    
+    //                 $(this).dialog("close");
+    //             },
+    //             clinical_Data_4_sample_studyID: function() {
+    //                 clinical_Data_4_sample_studyID.clinical_Data_4_sample_studyID(studyID);                    
+    //                 $(this).dialog("close");
+    //             },
+    //             clinical_Events: function() {
+    //                 clinical_Events.clinical_Events(patientID);
+    //                 $(this).dialog("close");
+    //             },
+    //             copy_number_segments: function() {
+    //                 copy_number_segments.copy_number_segments(sampleID);                    
+    //                 $(this).dialog("close");
+    //             },
+    //             molecular_data:function(){
+    //                 molecular_data.molecular_data();
+    //                 $(this).dialog("close");
+    //             },
+    //             all_patients_in_study:function(){
+    //                 all_patients_in_study.all_patients_in_study();
+    //                 $(this).dialog("close");
+    //             },                
+    //             patient_in_study:function(){
+    //                 patient_in_study.patient_in_study(patientID);
+    //                 $(this).dialog("close");
+    //             },
+    //             cBio_SamplesList: function() {
+    //                 cBio_SamplesList.cBio_SamplesList();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             sampleList_in_sampleId: function() {
+    //                 sampleList_in_sampleId.sampleList_in_sampleId();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             all_sampleIDs_in_samplelist: function() {
+    //                 all_sampleIDs_in_samplelist.all_sampleIDs_in_samplelist();                    
+    //                 $(this).dialog("close");
+    //             },                
+    //             samplelist_in_study: function() {
+    //                 samplelist_in_study.samplelist_in_study();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             allcaselists_in_study: function(){
+    //                 allcaselists_in_study.allcaselists_in_study();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             allsamples_patient_in_study: function() {
+    //                 allsamples_patient_in_study.allsamples_patient_in_study(patientID);                    
+    //                 $(this).dialog("close");
+    //             },
+    //             all_samples_in_study: function() {
+    //                 all_samples_in_study.all_samples_in_study();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             sample_in_study: function() {
+    //                 sample_in_study.sample_in_study(patientID);                    
+    //                 $(this).dialog("close");
+    //             },                                 
+    //             mutated_genes_in_study: function() {
+    //                 mutated_genes_in_study.mutated_genes_in_study();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             copynumberregions_in_study: function() {
+    //                 copynumberregions_in_study.copynumberregions_in_study();                    
+    //                 $(this).dialog("close");
+    //             },                
+    //             all_available_studies: function() {
+    //                 all_available_studies.all_available_studies();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             single_study: function() {
+    //                 single_study.single_study();                    
+    //                 $(this).dialog("close");
+    //             },
+    //             tags_of_study: function() {
+    //                 tags_of_study.tags_of_study();                    
+    //                 $(this).dialog("close");
+    //             },  
+    //             generic_cBioportal: function() {
+    //                 generic_cBioportal();
+    //                 $(this).dialog("close");
+    //             }
+    //         },
+    //         width: "600px"
+    //     });
+    // }
     $$("sliderdata").define("template", sliderTemplate);
     $$("sliderdata").parse(item);
     $$("sliderdata").refresh();    
